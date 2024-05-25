@@ -12,6 +12,7 @@ function Checkout() {
         <Box mt={5}>
           <Text>{item.name}</Text>
           <Text>${item.price}</Text>
+          <Text>Modifiers: {item.modifiers}</Text>
           <Button mt={3} colorScheme="teal">
             Pay Now
           </Button>

@@ -5,7 +5,7 @@ import { FaPlus, FaTrash } from "react-icons/fa";
 
 const Index = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [newItem, setNewItem] = useState({ name: "", description: "", price: "", image: "" });
+  const [newItem, setNewItem] = useState({ name: "", description: "", price: "", image: "", modifiers: "" });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -14,7 +14,7 @@ const Index = () => {
 
   const handleAddItem = () => {
     setMenuItems([...menuItems, newItem]);
-    setNewItem({ name: "", description: "", price: "", image: "" });
+    setNewItem({ name: "", description: "", price: "", image: "", modifiers: "" });
   };
 
   const handleDeleteItem = (index) => {
@@ -38,7 +38,8 @@ const Index = () => {
             <Textarea placeholder="Description" name="description" value={newItem.description} onChange={handleInputChange} />
             <Input placeholder="Price" name="price" value={newItem.price} onChange={handleInputChange} />
             <Input placeholder="Image URL" name="image" value={newItem.image} onChange={handleInputChange} />
-            <Button leftIcon={<FaPlus />} colorScheme="teal" onClick={handleAddItem}>
+            <Input placeholder="Modifiers (comma separated)" name="modifiers" value={newItem.modifiers} onChange={handleInputChange} />
+            <Button leftIcon={<FaPlus />} colorScheme="teal" onClick={handleAddItem} mt={2}>
               Add Item
             </Button>
           </VStack>
@@ -57,6 +58,7 @@ const Index = () => {
                 </Text>
                 <Text>{item.description}</Text>
                 <Text fontWeight="bold">${item.price}</Text>
+                <Text>Modifiers: {item.modifiers}</Text>
                 <IconButton aria-label="Delete item" icon={<FaTrash />} colorScheme="red" onClick={() => handleDeleteItem(index)} mt={2} />
                 <Button as={RouterLink} to="/checkout" state={{ item }} colorScheme="teal" mt={2}>
                   Buy
