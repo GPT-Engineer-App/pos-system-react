@@ -12,7 +12,12 @@ function Checkout() {
         <Box mt={5}>
           <Text>{item.name}</Text>
           <Text>${item.price}</Text>
-          <Text>Modifiers: {item.modifiers}</Text>
+          <Text>Selected Modifiers:</Text>
+          <Box>
+            {item.modifiers.map((modifier, idx) => (
+              <Text key={idx}>{modifier}</Text>
+            ))}
+          </Box>
           <Button mt={3} colorScheme="teal">
             Pay Now
           </Button>

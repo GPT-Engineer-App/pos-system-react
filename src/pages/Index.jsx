@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, VStack, HStack, Text, Input, Textarea, Button, Image, Box, SimpleGrid, IconButton, Link } from "@chakra-ui/react";
+import { Container, VStack, HStack, Text, Input, Textarea, Button, Image, Box, SimpleGrid, IconButton, Link, Checkbox, CheckboxGroup } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { FaPlus, FaTrash } from "react-icons/fa";
 
@@ -13,7 +13,11 @@ const Index = () => {
   };
 
   const handleAddItem = () => {
-    setMenuItems([...menuItems, newItem]);
+    const itemWithModifiers = {
+      ...newItem,
+      modifiers: newItem.modifiers.split(",").map((modifier) => modifier.trim()),
+    };
+    setMenuItems([...menuItems, itemWithModifiers]);
     setNewItem({ name: "", description: "", price: "", image: "", modifiers: "" });
   };
 
@@ -58,7 +62,14 @@ const Index = () => {
                 </Text>
                 <Text>{item.description}</Text>
                 <Text fontWeight="bold">${item.price}</Text>
-                <Text>Modifiers: {item.modifiers}</Text>
+                <Text>Modifiers:</Text>
+                <CheckboxGroup>
+                  {item.modifiers.map((modifier, idx) => (
+                    <Checkbox key={idx} value={modifier}>
+                      {modifier}
+                    </Checkbox>
+                  ))}
+                </CheckboxGroup>
                 <IconButton aria-label="Delete item" icon={<FaTrash />} colorScheme="red" onClick={() => handleDeleteItem(index)} mt={2} />
                 <Button as={RouterLink} to="/checkout" state={{ item }} colorScheme="teal" mt={2}>
                   Buy
