@@ -58,6 +58,9 @@ const Index = () => {
                 <Text>{item.description}</Text>
                 <Text fontWeight="bold">${item.price}</Text>
                 <IconButton aria-label="Delete item" icon={<FaTrash />} colorScheme="red" onClick={() => handleDeleteItem(index)} mt={2} />
+                <Button as={RouterLink} to="/checkout" state={{ item }} colorScheme="teal" mt={2}>
+                  Buy
+                </Button>
               </Box>
             ))}
           </SimpleGrid>
